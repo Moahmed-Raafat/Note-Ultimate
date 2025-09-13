@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Note Ultimate</string>
+    <string name="add_note">Add Note</string>
+    <string name="edit_note">Edit Note</string>
+    <string name="add_image">Add Image</string>
+    <string name="home">Home</string>
+    <string name="note_details">Note Details</string>
+    <string name="edit">Edit</string>
+
+    <string name="uploading_image">Uploading Image....</string>
+    <string name="note_created_successfully">Note created successfully</string>
+    <string name="camera_permission_is_required">Camera permission is required</string>
+    <string name="upload_image">Upload Image</string>
+    <string name="choose_an_image_from_the_gallery_or_take_a_new_photo.">Choose an image from the gallery or take a new photo.</string>
+    <string name="gallery">Gallery</string>
+    <string name="camera">Camera</string>
+</resources>

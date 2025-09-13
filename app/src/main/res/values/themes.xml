@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Theme.NoteUltimate" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/grey</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@color/primary</item>
+        <item name="android:windowLightNavigationBar">false</item>
+    </style>
+
+    <style name="Theme.MySplashScreen" parent="Theme.SplashScreen">
+        <item
+            name="android:windowSplashScreenBackground"
+            tools:targetApi="31">@color/background</item>
+        <item
+            name="android:windowSplashScreenAnimatedIcon"
+            tools:ignore="NewApi">@drawable/splash_icon</item>
+        <item name="postSplashScreenTheme">@style/Theme.NoteUltimate</item>
+    </style>
+</resources>
