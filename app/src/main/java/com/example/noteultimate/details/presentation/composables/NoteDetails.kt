@@ -3,6 +3,7 @@ package com.example.noteultimate.details.presentation.composables
 import android.annotation.SuppressLint
 import android.net.Uri
 import android.widget.Toast
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,7 +18,9 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.material3.CircularProgressIndicator
@@ -73,6 +76,7 @@ fun NoteDetails(navController: NavController,
         }
     }
 
+    val scrollState = rememberScrollState()
 
     Scaffold(
         modifier = Modifier
@@ -105,11 +109,12 @@ fun NoteDetails(navController: NavController,
 
         Column(modifier = Modifier
             .padding(innerPadding)
-            .padding(10.dp)
-            .fillMaxSize())
+            .fillMaxSize()
+            .background(colorResource(id = R.color.background))
+            .verticalScroll(scrollState))
         {
 
-            Column (modifier = Modifier.fillMaxSize())
+            Column (modifier = Modifier.fillMaxSize().padding(5.dp,0.dp))
             {
 
                 if (getNoteByIdState.isLoading) {
@@ -122,6 +127,8 @@ fun NoteDetails(navController: NavController,
                 }
 
                 getNoteByIdState.note?.let { note ->
+
+                    Spacer(modifier = Modifier.height(20.dp))
 
                     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
 
@@ -171,7 +178,6 @@ fun NoteDetails(navController: NavController,
 
                     }
 
-
                     Spacer(modifier = Modifier.height(20.dp))
 
                     // content
@@ -183,7 +189,6 @@ fun NoteDetails(navController: NavController,
                     )
 
                     Spacer(modifier = Modifier.height(50.dp))
-
 
                     Row (
                         modifier = Modifier
@@ -200,10 +205,10 @@ fun NoteDetails(navController: NavController,
                                 .size(26.dp)
                                 .clickable {
                                     deleteNoteViewModel.deleteNote(note)
-                                    Toast.makeText(context,"Note is deleted", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(context,R.string.note_is_deleted, Toast.LENGTH_SHORT).show()
                                     navController.navigate(Screens.NoteList.route)
                                 },
-                            tint = Color.Black
+                            tint = colorResource(R.color.red)
                         )
 
                         //date
@@ -214,13 +219,10 @@ fun NoteDetails(navController: NavController,
                             color = colorResource(R.color.text)
                         )
 
-
                     }
                 }
 
-
             }
-
 
         }
     }

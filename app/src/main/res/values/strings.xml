@@ -6,6 +6,15 @@
     <string name="home">Home</string>
     <string name="note_details">Note Details</string>
     <string name="edit">Edit</string>
+    <string name="add_new_note">add new note</string>
+    <string name="looks_empty_here">Looks empty here. Write something down!</string>
+    <string name="note_is_deleted">Note is deleted</string>
+    <string name="update_flag">update flag</string>
+    <string name="title">Title</string>
+    <string name="content">Content</string>
+    <string name="uploaded_image">uploaded image</string>
+    <string name="save">Save</string>
+
 
     <string name="uploading_image">Uploading Image....</string>
     <string name="note_created_successfully">Note created successfully</string>

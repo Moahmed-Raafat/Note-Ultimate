@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -58,6 +59,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -140,7 +142,7 @@ fun AddNote(
             buttonState = true
 
             // Show success Toast
-            Toast.makeText(context, "Note is added successfully", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context,R.string.note_created_successfully, Toast.LENGTH_SHORT).show()
 
             // Reset the success state
             viewModel.resetNoteAddedState()
@@ -176,7 +178,7 @@ fun AddNote(
         }
     ) { innerPadding ->
 
-        Column(modifier = Modifier.padding(innerPadding).padding(horizontal = 15.dp)
+        Column(modifier = Modifier.padding(innerPadding).background(colorResource(id = R.color.background))
             .fillMaxSize())
         {
 
@@ -191,10 +193,11 @@ fun AddNote(
                 verticalAlignment = Alignment.CenterVertically)
             {
                 OutlinedTextField(value = titleState,
-                    label = { Text(text = "enter title") },
+                    label = { Text(text = stringResource(R.string.title), color = colorResource(R.color.secondary)) },
                     onValueChange ={titleState=it},
                     singleLine = true,
-                    modifier = Modifier.fillMaxWidth())
+                    modifier = Modifier.fillMaxWidth(),
+                    textStyle = TextStyle(color = colorResource(R.color.text)))
             }
 
             Spacer(modifier = Modifier
@@ -208,17 +211,29 @@ fun AddNote(
                 verticalAlignment = Alignment.CenterVertically)
             {
                 OutlinedTextField(value = contentState,
-                    label = { Text(text = "enter content") },
+                    label = { Text(text =  stringResource(R.string.content), color = colorResource(R.color.secondary)) },
                     onValueChange ={contentState=it},
-                    singleLine = true,
-                    modifier = Modifier
-                        .fillMaxWidth())
+                    singleLine = false,
+                    modifier = Modifier.fillMaxWidth().height(150.dp),
+                    textStyle = TextStyle(color = colorResource(R.color.text),textAlign = TextAlign.Start))
             }
 
 
             Spacer(modifier = Modifier
                 .fillMaxWidth()
                 .height(10.dp))
+
+            //loading
+            if(progressBarState || isUploading)
+            {
+                Row (
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center)
+                {
+                    CircularProgressIndicator()
+                }
+            }
 
             //image
             Row (modifier = Modifier
@@ -227,17 +242,10 @@ fun AddNote(
                 verticalAlignment = Alignment.CenterVertically)
             {
                 Card(
-                    modifier =
-                        Modifier
-                            .fillMaxWidth()
-                            .height(300.dp)
-                            .border(
-                                border = BorderStroke(.5.dp, colorResource(id = R.color.black)),
-                                shape = RoundedCornerShape(5.dp)
-                            ),
+                    modifier = Modifier.fillMaxWidth().height(200.dp),
                     shape = RoundedCornerShape(10.dp),
                     colors = CardDefaults.cardColors(
-                        containerColor = colorResource(id = R.color.surface_card)
+                        containerColor = colorResource(id = R.color.background)
                     )
                 )
                 {
@@ -264,12 +272,12 @@ fun AddNote(
                                 horizontalAlignment = Alignment.CenterHorizontally){
                                 Icon(
                                     Icons.Rounded.Add,
-                                    contentDescription = "add image",
-                                    modifier = Modifier.size(50.dp),
+                                    contentDescription = stringResource(R.string.add_image),
+                                    modifier = Modifier.size(40.dp),
                                     tint = Color.Black
                                 )
                                 Text(text = stringResource(id = R.string.add_image),
-                                    fontSize = 25.sp,
+                                    fontSize = 15.sp,
                                     fontStyle = FontStyle.Italic)
                             }
 
@@ -294,7 +302,7 @@ fun AddNote(
                         ) {
                             AsyncImage(
                                 model = uploadedImageUrl,
-                                contentDescription = "Uploaded Image",
+                                contentDescription = stringResource(R.string.uploaded_image),
                                 contentScale = ContentScale.Crop,
                                 modifier = Modifier
                                     .fillMaxSize()
@@ -306,14 +314,13 @@ fun AddNote(
                 }
             }
 
-
             Spacer(modifier = Modifier
                 .fillMaxWidth()
                 .height(30.dp))
 
             //save
-            Row (modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically)
+            Row (modifier = Modifier.fillMaxWidth().fillMaxHeight(),
+                verticalAlignment = Alignment.Bottom)
             {
 
                 Button(
@@ -337,20 +344,10 @@ fun AddNote(
                     shape = RoundedCornerShape(5.dp)
                 )
                 {
-                    Text(text = "save", fontSize = 20.sp)
+                    Text(text = stringResource(R.string.save), fontSize = 20.sp)
                 }
             }
 
-            if(progressBarState || isUploading)
-            {
-                Row (
-                    modifier = Modifier.fillMaxSize(),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center)
-                {
-                    CircularProgressIndicator()
-                }
-            }
         }
     }
 

@@ -5,6 +5,7 @@ import android.content.Context
 import android.net.Uri
 import android.widget.Toast
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -33,6 +34,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -148,7 +150,7 @@ fun NotesList(navController: NavController,
                     modifier = Modifier.testTag(AppConstants.FLOATING_ACTION_BUTTON_OF_NOTES_LIST)) {
                     Icon(
                         Icons.Rounded.Add,
-                        contentDescription = "add_new_note",
+                        contentDescription = stringResource(R.string.add_new_note),
                         modifier = Modifier.size(26.dp) ,
                         tint = colorResource(R.color.white)
                     )
@@ -160,11 +162,10 @@ fun NotesList(navController: NavController,
 
         Column(modifier = Modifier
             .padding(innerPadding)
-            .padding(10.dp)
-            .fillMaxSize())
+            .fillMaxSize().background(colorResource(id = R.color.background)))
         {
 
-            Box(modifier = Modifier.fillMaxSize()) {
+            Box(modifier = Modifier.fillMaxSize().padding(5.dp,10.dp)) {
                 SwipeRefresh(
                     state = rememberSwipeRefreshState(isRefreshing),
                     onRefresh = {
@@ -198,11 +199,11 @@ fun NotesList(navController: NavController,
                                     {
                                         Icon(
                                             Icons.Rounded.Add,
-                                            contentDescription = "add image",
+                                            contentDescription = stringResource(R.string.add_image),
                                             modifier = Modifier.size(30.dp),
                                             tint = colorResource(R.color.text)
                                         )
-                                        Text("Looks empty here. Write something down!",
+                                        Text(text = stringResource(R.string.looks_empty_here),
                                             color = colorResource(R.color.text))
                                     }
 
@@ -219,7 +220,6 @@ fun NotesList(navController: NavController,
                     isRefreshing = false
                 }
             }
-
         }
     }
 
@@ -248,7 +248,10 @@ private fun ShowList(navController: NavController,
                         navController.navigate(Screens.NoteDetails.route + "/" + item.id.toString())
                     },
                 shape = RoundedCornerShape(10.dp),
-                elevation = CardDefaults.cardElevation(defaultElevation = 10.dp)
+                elevation = CardDefaults.cardElevation(defaultElevation = 10.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = colorResource(R.color.secondary)
+                )
             )
             {
                 Column(modifier = Modifier
@@ -325,10 +328,10 @@ private fun ShowList(navController: NavController,
                                 .size(26.dp)
                                 .clickable {
                                     deleteNoteViewModel.deleteNote(item)
-                                    Toast.makeText(context,"Note is deleted", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(context,R.string.note_is_deleted, Toast.LENGTH_SHORT).show()
                                     noteListViewModel.getNotes()
                                 },
-                            tint = Color.Black
+                            tint = colorResource(R.color.red)
                         )
 
                         Row {
@@ -350,14 +353,12 @@ private fun ShowList(navController: NavController,
 
                                 Image(
                                     painter = painterResource(id = R.drawable.updated_icon),
-                                    contentDescription = "updated",
+                                    contentDescription = stringResource(R.string.update_flag),
                                     contentScale = ContentScale.Crop,
                                     modifier = Modifier.size(35.dp)
                                 )
                             }
                         }
-
-
 
 
 
