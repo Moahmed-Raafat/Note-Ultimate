@@ -352,7 +352,7 @@ private fun ShowList(navController: NavController,
                                     painter = painterResource(id = R.drawable.updated_icon),
                                     contentDescription = "updated",
                                     contentScale = ContentScale.Crop,
-                                    modifier = Modifier.size(30.dp)
+                                    modifier = Modifier.size(35.dp)
                                 )
                             }
                         }
