@@ -170,7 +170,9 @@ fun EditNote(
         if (isNoteAdded) {
 
             // Navigate to the NoteList screen
-            navController.navigate(Screens.NoteList.route)
+            navController.navigate(Screens.NoteList.route){
+                popUpTo(0)
+            }
 
             buttonState = true
 

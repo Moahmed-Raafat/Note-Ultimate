@@ -10,7 +10,8 @@
 
     <color name="grey">#FF9E9E9E</color>
 
-    <color name="primary">#0052CC</color> <!--FAB, buttons, active elements-->
+    <!--<color name="primary">#0052CC</color> &lt;!&ndash;FAB, buttons, active elements&ndash;&gt;-->
+    <color name="primary">#DAB1DA</color> <!--FAB, buttons, active elements-->
     <color name="secondary">#2684FF</color><!--Highlights, selection states, icons-->
     <color name="background">#F4F5F7</color><!--Screen background (light grey)-->
     <color name="surface_card">#FFFFFF</color><!--Cards, textfields, sheets (white)-->
